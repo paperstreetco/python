@@ -1,0 +1,13 @@
+[Unit]
+Description=Gunicorn instance to serve webapp
+After=network.target
+
+[Service]
+User=xyo
+Group=www-data
+WorkingDirectory=/home/xyo/webapp
+Environment="PATH=/home/xyo/webapp/venv/bin"
+ExecStart=/home/xyo/webapp/venv/bin/gunicorn --workers 3 --bind unix:webapp.sock -m 007 wsgi:app
+
+[Install]
+WantedBy=multi-user.target
